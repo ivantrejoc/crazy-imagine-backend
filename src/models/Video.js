@@ -1,4 +1,4 @@
-const { DataTypes, INTEGER } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -23,16 +23,16 @@ module.exports = (sequelize) => {
 
       like_count: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        defaultValue: 0
       },
       unlike_count: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        defaultValue: 0
       },
 
       popularity_count: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        defaultValue: 0
       }
     },
     {

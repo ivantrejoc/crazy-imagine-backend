@@ -16,7 +16,13 @@ const createUser = async (name, email, password) => {
 const getUsers = async () => {
   try {
     const users = await User.findAll();
-    return users;
+    const usersData = users.map(user => {
+      return {
+        name: user.name,
+        email: user.email
+      };
+    });
+    return usersData;
   } catch (error) {
     console.error(error.message);
   }
