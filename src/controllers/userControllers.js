@@ -1,4 +1,4 @@
-const { User } = require("../DB_connection");
+const { User, Comment } = require("../DB_connection");
 
 //Crear User:
 const createUser = async (name, email, password) => {
@@ -15,13 +15,24 @@ const createUser = async (name, email, password) => {
 
 const getUsers = async () => {
   try {
-    const users = await User.findAll();
-    const usersData = users.map(user => {
-      return {
-        name: user.name,
-        email: user.email
-      };
+    const users = await User.findAll({
+      include: [
+        {
+          model: Comment,
+          attributes: ["video_id", "comment"],
+        },
+      ],
     });
+
+    const usersData = users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      comments: user.Comments.map((comment) => ({
+        video_id: comment.video_id,
+        comment: comment.comment,
+      })),
+    }));
     return usersData;
   } catch (error) {
     console.error(error.message);

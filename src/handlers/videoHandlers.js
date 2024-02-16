@@ -38,7 +38,7 @@ router.post("/massive", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const videos = await getVideos();
-    console.log("ESTOY RESPONDIENDO AL GET DE TODOS LOS VIDEOS");
+    console.log("ESTOY RESPONDIENDO AL GET DE TODOS LOS VIDEOS", videos);
     res.status(200).json(videos);
   } catch (error) {
     res.status(500).json({ message: error.message });
