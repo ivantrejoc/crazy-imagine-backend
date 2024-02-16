@@ -39,7 +39,14 @@ const getVideos = async () => {
 
 const getVideoById = async (id) => {
   try {
-    const video = await Video.findByPk(id);
+    const video = await Video.findByPk(id, {
+      include: [
+        {
+          model: Comment,
+          attributes: ['user_id', 'comment'] // Seleccionar los atributos deseados de Comment
+        }
+      ]
+    });
     return video;
   } catch (error) {
     console.error(error.message);
