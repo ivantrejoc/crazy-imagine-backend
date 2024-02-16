@@ -28,7 +28,7 @@ const getVideos = async () => {
       order: sequelize.literal("RANDOM()"), // Orden aleatorio
       include: {
         model: Comment,
-        attributes: ["user_id", "comment"] // Solo seleccionamos los atributos necesarios de los comentarios
+        attributes: ["name_user", "comment"] // Solo seleccionamos los atributos necesarios de los comentarios
       }
     });
     return videos;
@@ -43,7 +43,7 @@ const getVideoById = async (id) => {
       include: [
         {
           model: Comment,
-          attributes: ['user_id', 'comment'] // Seleccionar los atributos deseados de Comment
+          attributes: ['name_user', 'comment'] // Seleccionar los atributos deseados de Comment
         }
       ]
     });

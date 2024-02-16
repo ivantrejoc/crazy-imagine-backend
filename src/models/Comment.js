@@ -15,6 +15,11 @@ module.exports = (sequelize) => {
       foreingKey: true,
       allowNull: false
     },
+
+    name_user: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     video_id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -26,8 +31,8 @@ module.exports = (sequelize) => {
       defaultValue: 1
     },
     comment: {
-        type: DataTypes.TEXT,
-        allowNull: false
+      type: DataTypes.TEXT,
+      allowNull: false
     },
     created: {
       type: DataTypes.DATE,
