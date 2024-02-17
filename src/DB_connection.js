@@ -64,7 +64,6 @@ User.hasMany(UserVideo, { foreignKey: "user_id", sourceKey: "id" });
 UserVideo.belongsTo(User, { foreignKey: "user_id", targetKey: "id" });
 Video.hasMany(UserVideo, { foreignKey: "video_id", sourceKey: "id" });
 UserVideo.belongsTo(Video, { foreignKey: "video_id", targetKey: "id" });
-
 module.exports = {
   User,
   Video,
