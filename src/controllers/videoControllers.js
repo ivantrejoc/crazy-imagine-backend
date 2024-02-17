@@ -1,5 +1,6 @@
 const sequelize = require("sequelize");
 const { Video, Like, Unlike, Comment } = require("../DB_connection");
+const { Op } = require("sequelize");
 
 //Crear Videos:
 const createVideo = async (title, link) => {
@@ -22,6 +23,7 @@ const bulkCreateVideos = async (videosData) => {
   }
 };
 
+//Todos los videos
 const getVideos = async () => {
   try {
     const videos = await Video.findAll({
@@ -37,13 +39,14 @@ const getVideos = async () => {
   }
 };
 
+//Video por ID
 const getVideoById = async (id) => {
   try {
     const video = await Video.findByPk(id, {
       include: [
         {
           model: Comment,
-          attributes: ['name_user', 'comment'] // Seleccionar los atributos deseados de Comment
+          attributes: ["name_user", "comment"] // Seleccionar los atributos deseados de Comment
         }
       ]
     });
@@ -53,9 +56,41 @@ const getVideoById = async (id) => {
   }
 };
 
+//5 Videos más populares
+const getMostPopularVideos = async () => {
+  console.log("ESTOY ENTRANDO AL CONTROLLER");
+  try {
+    let videos;
+    const highestPopularityVideos = await Video.findAll({
+      order: [["popularity_count", "DESC"]],
+      limit: 5
+    });
+
+    //MISMO VALOR POPULARITY
+    if (
+      highestPopularityVideos.every(
+        (video) =>
+          video.popularity_count === highestPopularityVideos[0].popularity_count
+      )
+    ) {
+      videos = await Video.findAll({
+        order: sequelize.literal("RANDOM()"),
+        limit: 5
+      });
+    } else {
+      videos = highestPopularityVideos;
+    }
+
+    return videos;
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 module.exports = {
   createVideo,
   bulkCreateVideos,
   getVideos,
-  getVideoById
+  getVideoById,
+  getMostPopularVideos
 };
