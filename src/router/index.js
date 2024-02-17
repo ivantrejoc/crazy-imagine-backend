@@ -1,7 +1,9 @@
 const { Router } = require("express");
-const handlersUser = require("../handlers/userHandlers")
+const handlersUser = require("../handlers/userHandlers");
 const handlersVideos = require("../handlers/videoHandlers");
-const handlersComment = require("../handlers/commentHandlers")
+const handlersComment = require("../handlers/commentHandlers");
+const handlersLike = require("../handlers/likeHandlers");
+const handlersUnlike = require("../handlers/unlikeHandlers")
 const router = Router();
 
 // router.use("/");
@@ -11,6 +13,10 @@ router.use("/user", handlersUser);
 router.use("/video", handlersVideos);
 //Rutas de comments
 router.use("/comment", handlersComment);
+//Rutas de likes
+router.use("/like", handlersLike);
+//Rutas de unlikes
+router.use("/unlike", handlersUnlike);
 
 
 

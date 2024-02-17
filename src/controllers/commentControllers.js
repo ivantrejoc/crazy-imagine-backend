@@ -1,10 +1,11 @@
 const { Comment } = require("../DB_connection");
 
 //Crear Comment:
-const createComment = async (user_id, video_id, comment) => {
+const createComment = async (user_id, video_id, name_user, comment ) => {
     try {
       await Comment.create({
         user_id,
+        name_user,
         video_id,
         comment
       });

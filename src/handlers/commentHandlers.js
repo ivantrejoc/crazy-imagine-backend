@@ -6,9 +6,9 @@ const router = Router();
 
 //Controller para crear Comments:
 router.post("/", async (req, res) => {
-    const { user_id, video_id, comment } = req.body;
+    const { user_id, video_id, name_user, comment } = req.body;
     try {
-      await createComment(user_id, video_id, comment);
+      await createComment(user_id, video_id, name_user, comment);
       res.status(201).json("COMMENT CREATED");
     } catch (error) {
       res.status(500).json({ message: error.message });
