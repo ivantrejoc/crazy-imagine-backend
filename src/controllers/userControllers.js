@@ -57,7 +57,7 @@ const login = async (email) => {
   }
 };
 
-//obtener user:
+
 
 module.exports = {
   createUser,

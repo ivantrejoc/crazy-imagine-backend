@@ -13,12 +13,17 @@ const USER = process.env.DB_USER;
 const PASSWORD = process.env.DB_PASSWORD;
 const HOST = process.env.DB_HOST;
 const SERVER = process.env.DB_SERVER;
-const NAME = process.env.DB_NAME;
+const DBNAME = process.env.DB_NAME;
 
 //Conexión DB
 const sequelize = new Sequelize(
-  `${URL}${USER}:${PASSWORD}@${HOST}:${SERVER}/${NAME}`
+  `${URL}${USER}:${PASSWORD}@${HOST}:${SERVER}/${DBNAME}`
 );
+
+// const sequelize = new Sequelize(DBNAME, USER, PASSWORD, {
+//   host: HOST,
+//   dialect: "postgres"
+// });
 //Prueba Conexión
 // const testing = async() =>{
 //     try {
