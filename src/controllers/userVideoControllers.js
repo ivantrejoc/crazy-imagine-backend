@@ -1,4 +1,4 @@
-const { UserVideo } = require("../DB_connection");
+const { UserVideo, Video } = require("../DB_connection");
 
 
 //Crear nuevo vidoe visto
@@ -16,17 +16,22 @@ const createUserVideo = async (user_id, video_id) => {
 
 const getUserVideos = async (id) => {
   try {
-    const usersVideo = await UserVideo.findAll({
+    const userVideos = await UserVideo.findAll({
       where: {
         user_id: id
-      }
+      },
+      include: [
+        {
+          model: Video,
+          attributes: ['id', 'title', 'link', 'like_count', 'unlike_count', 'popularity_count']
+        }
+      ]
     });
-    return usersVideo;
-  } catch(error) {
+    return userVideos;
+  } catch (error) {
     console.error(error);
-    
   }
-}
+};
 
 module.exports = {
   createUserVideo,
