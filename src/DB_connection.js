@@ -16,6 +16,7 @@ const SERVER = process.env.DB_SERVER;
 const DBNAME = process.env.DB_NAME;
 
 //Conexión DB
+
 const sequelize = new Sequelize(
   `${URL}${USER}:${PASSWORD}@${HOST}:${SERVER}/${DBNAME}`
 );
